@@ -17,6 +17,8 @@ This repository contains the `MeshToBody.py` FreeCAD macro, which converts a sel
 - Provides user-friendly error messages and progress notifications.
 - Supports **undo transactions** for safe modifications.
 
+![image](https://github.com/user-attachments/assets/48df98a9-d1bf-479a-b0e8-8c37be4edf65)
+
 ## Requirements
 
 - **FreeCAD** → Version **1.0.1+**
