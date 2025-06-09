@@ -1,4 +1,5 @@
 # MeshToBody FreeCAD Macro
+![MeshToBody](https://github.com/user-attachments/assets/5ead9567-3c8c-40a1-a8f5-066e9259917e)
 
 This repository contains the `MeshToBody.py` FreeCAD macro, which converts a selected mesh object into a refined, simple solid and integrates it into a **PartDesign Body**. The macro ensures the mesh is valid before conversion, allowing users to manually repair it if needed.
 
