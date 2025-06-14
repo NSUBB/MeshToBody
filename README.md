@@ -5,6 +5,8 @@
   - Original commit version includes the popup interaction described below.
 - **Version 250611**
   - Updated version removes necessity for user intervention during conversion by testing the mesh via API call instead of GUI call for Mesh_EvaluateSolid.
+ 
+https://forum.freecad.org/viewtopic.php?t=97579
 
 This repository contains the **MeshToBody** FreeCAD macro, which converts the selected mesh object into a refined, simple solid and integrates it into a **PartDesign Body**. The macro ensures the mesh is valid before conversion, allowing users to manually repair it if needed.
 
