@@ -1,7 +1,12 @@
 # MeshToBody FreeCAD Macro
 ![MeshToBody](https://github.com/user-attachments/assets/5ead9567-3c8c-40a1-a8f5-066e9259917e)
 
-This repository contains the `MeshToBody.py` FreeCAD macro, which converts a selected mesh object into a refined, simple solid and integrates it into a **PartDesign Body**. The macro ensures the mesh is valid before conversion, allowing users to manually repair it if needed.
+- **Version 250608**
+  - Original commit version includes the popup interaction described below.
+- **Version 250611**
+  - Updated version removes necessity for user intervention during conversion by testing the mesh via API call instead of GUI call for Mesh_EvaluateSolid.
+
+This repository contains the **MeshToBody** FreeCAD macro, which converts the selected mesh object into a refined, simple solid and integrates it into a **PartDesign Body**. The macro ensures the mesh is valid before conversion, allowing users to manually repair it if needed.
 
 ## Features
 
@@ -27,10 +32,8 @@ This repository contains the `MeshToBody.py` FreeCAD macro, which converts a sel
 
 ## Installation
 
-1. Download the `MeshToBody.py` file and rename it with the `.FCMacro` extension.
-2. Place the file in your FreeCAD macros directory:
-   - Windows: `C:\Users\<YourUsername>\AppData\Roaming\FreeCAD\Macro\`
-   - Linux/macOS: `~/.FreeCAD/Macro/`
+1. Download the `MeshToBody_XXXXXX.py` file and rename it (optional) with the `.FCMacro` extension.
+2. Place the file in your FreeCAD macros directory.
 3. Restart FreeCAD if it is already running.
 
 ## Usage
@@ -39,7 +42,7 @@ This repository contains the `MeshToBody.py` FreeCAD macro, which converts a sel
 2. Select a **mesh object** in the 3D view or from the model tree.
 3. Run the macro:
    - Open the **Macro** menu in FreeCAD.
-   - Select **Macros...**, choose `MeshToBody.py`, and click **Execute**.
+   - Select **Macros...**, choose `MeshToBody_XXXXXX.py`, and click **Execute**.
 
 ### Mesh Evaluation Process
 - The macro first runs **Mesh_EvaluateSolid** to check if the mesh is a valid solid.
