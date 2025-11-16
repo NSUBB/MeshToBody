@@ -1,75 +1,57 @@
-# MeshToBody FreeCAD Macro
+# MeshToBody FreeCAD Macro (v2.0)
 ![MeshToBody](https://github.com/user-attachments/assets/5ead9567-3c8c-40a1-a8f5-066e9259917e)
-
-- **Version 250608**
-  - Original commit version includes the popup interaction described below.
-- **Version 250611**
-  - Updated version removes necessity for user intervention during conversion by testing the mesh via API call instead of GUI call for Mesh_EvaluateSolid.
  
 https://forum.freecad.org/viewtopic.php?t=97579
 
-This repository contains the **MeshToBody** FreeCAD macro, which converts the selected mesh object into a refined, simple solid and integrates it into a **PartDesign Body**. The macro ensures the mesh is valid before conversion, allowing users to manually repair it if needed.
+The **MeshToBody** FreeCAD macro converts the selected or all mesh objects into a refined, simple solid or compound and integrates it into a **PartDesign Body**. 
+Version **2.0** introduces a unified workflow with improved report messaging and robust cleanup.
 
 ## Features
 
-- Evaluates the selected mesh before conversion using FreeCAD’s `Mesh_EvaluateSolid`.
-- Provides a **single popup** with three options:
-  - ✅ **Yes, Proceed Conversion** → Converts the mesh into a solid.
-  - 🛠 **No, Open Repair Mesh** → Runs `Mesh_Evaluation` for manual fixes.
-  - ❌ **Cancel Conversion** → Stops execution.
-- Converts a selected mesh into a solid shape using `makeShapeFromMesh()`.
-- Refines the solid to remove unnecessary edges.
-- Creates a simple copy of the refined solid.
-- Integrates the simple solid into a new **PartDesign Body**.
-- Automatically cleans up intermediate objects after validation.
-- Provides user-friendly error messages and progress notifications.
+- **Unified entry point**: Works on selected meshes or all meshes in the document
+- **Pre‑collection & schedule**: Gathers facet/component counts and prints a sorted conversion plan
+- **Smart evaluation**: Decides whether to proceed, split, repair, or compound based on mesh state
+- **Component splitting**: Handles multi‑component meshes safely, assembling solids into compounds
+- **Conservative repair**: Attempts non‑destructive fixes (duplicate removal, hole filling, harmonized normals)
+- **Guardrails**: Skips meshes with >50 components when multiple meshes are present
+- **Granular feedback**: Console shows facet/component counts, warnings for large meshes, start markers, and elapsed times
+- **Automatic cleanup**: Interim objects are removed on both success and failure
 - Supports **undo transactions** for safe modifications.
-
-![image](https://github.com/user-attachments/assets/48df98a9-d1bf-479a-b0e8-8c37be4edf65)
 
 ## Requirements
 
-- **FreeCAD** → Version **1.0.1+**
-- **PySide** → Required for GUI elements (included with FreeCAD)
+- **FreeCAD** v1.0.2+
 
 ## Installation
 
-1. Download the `MeshToBody_XXXXXX.py` file and rename it (optional) with the `.FCMacro` extension.
-2. Place the file in your FreeCAD macros directory.
-3. Restart FreeCAD if it is already running.
+1. Download `MeshToBody_2.0.py`  
+2. Place it in your FreeCAD macros directory (`Edit > Preferences > General > Macro`)  
+3. Restart FreeCAD if already running
 
 ## Usage
 
-1. Open your FreeCAD project and ensure the document is active.
-2. Select a **mesh object** in the 3D view or from the model tree.
-3. Run the macro:
-   - Open the **Macro** menu in FreeCAD.
-   - Select **Macros...**, choose `MeshToBody_XXXXXX.py`, and click **Execute**.
+1. Open a FreeCAD project  
+2. Select one or more mesh objects, or leave no selection to process all meshes  
+3. Run the macro via `Macro > Macros... > MeshToBody_2.0.py > Execute`
+   - Optional: Use the included SVG icon for custom toolbar.
+5. Watch the Report Viewer for the conversion schedule, progress updates, and summary
 
-### Mesh Evaluation Process
-- The macro first runs **Mesh_EvaluateSolid** to check if the mesh is a valid solid.
-- A **popup** appears with three options:
-  - ✅ **Yes, Proceed Conversion** → Converts the mesh into a solid.
-  - 🛠 **No, Open Repair Mesh** → Runs `Mesh_Evaluation` for manual fixes.
-  - ❌ **Cancel Conversion** → Stops execution.
-- If conversion proceeds, the macro creates a **PartDesign Body** with a base feature of the refined simple solid.
+### Notes
+
+- Meshes with >10k facets may take significant time  
+- Meshes with >50 components are skipped when multiple meshes are present — rerun them individually  
+- Failed conversions are logged and cleaned up automatically
 
 ## Output
 
-- A new **PartDesign Body** containing the converted solid will be created.
-- The original mesh and intermediate objects will be removed if the conversion is successful.
-- If the conversion fails, the original mesh will be retained.
-
-## Error Handling
-
-- If **no object is selected**, the macro will prompt the user to select a mesh and terminate.
-- If the **selected object is not a mesh**, the macro will display an error message and terminate.
-- If the **mesh is not a valid solid**, the macro will prompt the user to repair it before proceeding.
-- If the **refined solid is invalid**, the macro will retain the original mesh and notify the user.
+- A new **PartDesign Body** per mesh, containing a BaseFeature to the converted solid or compound 
+- Skipped meshes remain in the document with reasons logged  
+- Final summary reports converted vs. skipped counts and total runtime
 
 ## License
 
-This project is licensed under the [GNU General Public License v3.0](LICENSE).
+Licensed under the [GNU GPL v3.0](LICENSE)
+
 
 ## Contributing
 
