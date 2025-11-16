@@ -1,3 +1,18 @@
+# -*- coding: utf-8 -*-
+"""
+MeshToBody Macro for FreeCAD
+----------------------------
+Version: 2.0.0
+Date:    2025-11-15
+Author:  NSUBB (DesignWeaver3D)
+License: GPL-3.0-or-later
+Repository: https://github.com/NSUBB/MeshToBody
+Forum Thread: https://forum.freecad.org/viewtopic.php?t=101189
+
+Description:
+    FreeCAD Macro to convert one or many Meshes to Refined Solids as BaseFeature of PartDesign Bodies.
+"""
+
 import FreeCAD
 import FreeCADGui
 import Mesh
