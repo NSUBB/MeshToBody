@@ -27,7 +27,7 @@ Version **2.0** introduces a unified workflow with improved report messaging and
 ## Installation
 
 1. Download `MeshToBody_2.0.py`  
-2. Place it in your FreeCAD macros directory (`Edit > Preferences > General > Macro`)  
+2. Place it in your FreeCAD macros directory (`Edit > Preferences > Python > Macro > Macro path`)  
 3. Restart FreeCAD if already running
 
 ## Usage
