@@ -26,15 +26,17 @@ Version **2.0** introduces a unified workflow with improved report messaging and
 
 ## Installation
 
-1. Download `MeshToBody_2.0.py`  
-2. Place it in your FreeCAD macros directory (`Edit > Preferences > Python > Macro > Macro path`)  
+1. Download `MeshToBody.py`  
+2. Place it in your FreeCAD macros directory which can be determined in these locations:
+   - `Edit > Preferences > Python > Macro > Macro path`
+   - `Macro > Macros... > User macros location:`
 3. Restart FreeCAD if already running
 
 ## Usage
 
 1. Open a FreeCAD project  
 2. Select one or more mesh objects, or leave no selection to process all meshes  
-3. Run the macro via `Macro > Macros... > MeshToBody_2.0.py > Execute`
+3. Run the macro via `Macro > Macros... > MeshToBody.py > Execute`
    - Optional: Use the included SVG icon for custom toolbar.
 5. Watch the Report Viewer for the conversion schedule, progress updates, and summary
 
