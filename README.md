@@ -1,12 +1,14 @@
 # MeshToBody FreeCAD Macro (v2.0)
 ![MeshToBody](https://github.com/user-attachments/assets/5ead9567-3c8c-40a1-a8f5-066e9259917e)
 
-## Demonstration video: https://youtu.be/EWC2T1qP_OI
-
-https://forum.freecad.org/viewtopic.php?t=97579
-
 The **MeshToBody** FreeCAD macro converts the selected or all mesh objects into a refined, simple solid or compound and integrates it into a **PartDesign Body**. 
 Version **2.0** introduces a unified workflow with improved report messaging and robust cleanup.
+
+📺 Click the image below to watch the demo video on YouTube
+
+[![Watch the demo video](https://img.youtube.com/vi/EWC2T1qP_OI/maxresdefault.jpg)](https://www.youtube.com/watch?v=EWC2T1qP_OI)
+
+https://forum.freecad.org/viewtopic.php?t=97579
 
 ## Features
 
