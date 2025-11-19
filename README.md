@@ -68,4 +68,5 @@ Contributions are welcome! Feel free to submit **issues or pull requests** to im
 This macro is provided **"as is"** without any warranty. Use it at your own risk.
 
 ## Change Log
-- v2.0.1 - Changed from making Part Compound to Part Fusion for better PartDesign body compatibility.
+- v2.0.1 - 2025.11.15 Changed from making Part Compound to Part Fusion for better PartDesign body compatibility.
+- v2.0.0 - 2025.11.16 Initial release of v2.0.
