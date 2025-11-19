@@ -2,8 +2,8 @@
 """
 MeshToBody Macro for FreeCAD
 ----------------------------
-Version: 2.0.0
-Date:    2025-11-15
+Version: 2.0.1
+Date:    2025-11-18
 Author:  NSUBB (DesignWeaver3D)
 License: GPL-3.0-or-later
 Repository: https://github.com/NSUBB/MeshToBody
@@ -117,20 +117,20 @@ def convert_mesh_to_solid(mesh_obj, base_name, doc):
         return False, None, []
 
 # --- Compound solids ---
-def compound_solids(solids, base_name, doc):
+def fusion_solids(solids, base_name, doc):
     if len(solids) == 0:
         return False, None, []
     if len(solids) == 1:
         return True, solids[0], []
 
-    FreeCAD.Console.PrintMessage(f"🔄 Creating compound for {len(solids)} solids...\n")
-    comp_obj = doc.addObject("Part::Compound", base_name + "_compound")
-    comp_obj.Links = solids
+    FreeCAD.Console.PrintMessage(f"🔄 Creating fusion for {len(solids)} solids...\n")
+    fusion = doc.addObject("Part::MultiFuse", base_name + "_fusion")
+    fusion.Shapes = solids
     for s in solids:
         s.Visibility = False
     doc.recompute()
 
-    return True, comp_obj, []  # keep solids, they are part of compound
+    return True, fusion, []  # keep solids, they are part of the fusion
 
 # --- Split components ---
 def split_components_safe(mesh_obj, base_name, doc):
@@ -155,7 +155,7 @@ def evaluate_mesh(mesh_obj):
     mesh = mesh_obj.Mesh
     comps = mesh.countComponents()
     if comps > 1:
-        return "compound"
+        return "fusion"
     if mesh.isSolid() and not mesh.hasNonManifolds() and not mesh.hasSelfIntersections():
         return "proceed"
     if not mesh.isSolid() and mesh.hasSelfIntersections():
@@ -174,7 +174,7 @@ def convert_single_mesh(mesh_obj, doc):
         if decision == "proceed":
             success, final_solid, _ = convert_mesh_to_solid(mesh_obj, base_name, doc)
 
-        elif decision == "compound":
+        elif decision == "fusion":
             comp_objs, _ = split_components_safe(mesh_obj, base_name, doc)
             interims.extend([c.Name for c in comp_objs])  # mesh features are interim
 
@@ -189,7 +189,7 @@ def convert_single_mesh(mesh_obj, doc):
                 else:
                     raise RuntimeError(f"Component {comp_name} failed conversion")
 
-            success, final_solid, _ = compound_solids(solids, base_name, doc)
+            success, final_solid, _ = fusion_solids(solids, base_name, doc)
 
         elif decision == "try_split":
             comp_objs, is_true_comp = split_components_safe(mesh_obj, base_name, doc)
@@ -206,7 +206,7 @@ def convert_single_mesh(mesh_obj, doc):
                         solids.append(solid_i)
                     else:
                         raise RuntimeError(f"Component {comp_name} failed conversion")
-                success, final_solid, _ = compound_solids(solids, base_name, doc)
+                success, final_solid, _ = fusion_solids(solids, base_name, doc)
             else:
                 FreeCAD.Console.PrintMessage("🧩 Split produced only one component, treating as single mesh.\n")
                 success, final_solid, _ = convert_mesh_to_solid(mesh_obj, base_name, doc)
@@ -246,7 +246,7 @@ def convert_single_mesh(mesh_obj, doc):
         FreeCAD.Console.PrintMessage(f"❌ Conversion failed for '{mesh_obj.Name}': {e}\n")
         # FAILURE CLEANUP
         cleanup_interims(doc, interims, label="failure cleanup")
-        for suffix in ["_Body", "_compound"]:
+        for suffix in ["_Body", "_fusion"]:
             name = f"{base_name}{suffix}"
             if doc.getObject(name):
                 doc.removeObject(name)
