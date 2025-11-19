@@ -1,7 +1,7 @@
 # MeshToBody FreeCAD Macro (v2.0)
 ![MeshToBody](https://github.com/user-attachments/assets/5ead9567-3c8c-40a1-a8f5-066e9259917e)
 
-The **MeshToBody** FreeCAD macro converts the selected or all mesh objects into a refined, simple solid or fusion and integrates it into a **PartDesign Body**. 
+The **MeshToBody** FreeCAD macro converts the selected or all mesh objects into a refined, simple solid or fusion of solids and integrates it into a **PartDesign Body**. 
 Version **2.0** introduces a unified workflow with improved report messaging and robust cleanup.
 
 📺 Click the image below to watch the demo video on YouTube
@@ -14,7 +14,7 @@ https://forum.freecad.org/viewtopic.php?t=97579
 
 - **Unified entry point**: Works on selected meshes or all meshes in the document
 - **Pre‑collection & schedule**: Gathers facet/component counts and prints a sorted conversion plan
-- **Smart evaluation**: Decides whether to proceed, split, repair, or fusion based on mesh state
+- **Smart evaluation**: Decides whether to proceed, split, repair, or fuse based on mesh state
 - **Component splitting**: Handles multi‑component meshes safely, assembling solids into fusions
 - **Conservative repair**: Attempts non‑destructive fixes (duplicate removal, hole filling, harmonized normals)
 - **Guardrails**: Skips meshes with >50 components when multiple meshes are present
@@ -50,7 +50,7 @@ https://forum.freecad.org/viewtopic.php?t=97579
 
 ## Output
 
-- A new **PartDesign Body** per mesh, containing a BaseFeature to the converted solid or fusion 
+- A new **PartDesign Body** per original mesh, containing a BaseFeature to the converted solid or fusion of solids 
 - Skipped meshes remain in the document with reasons logged  
 - Final summary reports converted vs. skipped counts and total runtime
 
